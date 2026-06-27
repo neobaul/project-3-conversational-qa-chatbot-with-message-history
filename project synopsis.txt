@@ -1,0 +1,17 @@
+**Project Synopsis**
+
+This project is a collection of three LangChain experiments exploring how to build intelligent, structured AI pipelines using OpenAI's GPT-4o — covering dynamic query routing, vector-based retrieval, and agentic self-correction.
+
+---
+
+**`getting_started.ipynb` — Intelligent Query Router**
+
+This notebook builds a multi-chain LLM pipeline that classifies incoming developer questions and routes them to the right expert chain. It uses a Pydantic schema (`TechnicalReview`) to extract three structured fields from every query — category, complexity, and suggested tools. Based on the category, the query is routed either to an architecture expert chain or a general engineering chain, each with its own specialized prompt. The routing is handled dynamically at runtime using `RunnableParallel` and `RunnableLambda`.
+
+**`main.ipynb` — Vector Stores and Retrievers**
+
+This notebook is a hands-on introduction to RAG fundamentals. It creates a small document collection (pet facts), embeds them using HuggingFace, stores them in Chroma, and demonstrates similarity search and retrieval. It then wires the retriever into a full RAG chain using Groq's LLaMA model to answer questions grounded in the document collection.
+
+**`Simpleapp.py` — Agentic Self-Correcting RAG**
+
+This is the most advanced file — a production-grade RAG engine that scrapes a live URL, chunks and embeds the content into a FAISS vector store, then runs a supervisor grading agent to evaluate each retrieved chunk before passing only the verified content to the LLM for answer generation. Responses are streamed in real time.
